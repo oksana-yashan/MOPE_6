@@ -5,6 +5,7 @@ from functools import reduce
 from itertools import compress
 import scipy
 from scipy.stats import f,t
+from datetime import datetime
 
 
 x1min, x2min, x3min = -25, -20, -20
@@ -26,7 +27,7 @@ N = 8
 counter = 0
 with_interaction = False
 check = True
-
+begin = datetime.now()
 
 
 while (check):  # from Lab3
@@ -191,11 +192,12 @@ if Fp < Ft:
     print("Рівняння регресії з врахуванням ефекту взаємодії:")
 else:
     print("Рівняння регресії адекватно оригіналу при q = 0,05")
+time_Lab3 = str(datetime.now()-begin)[6:]
 
 
 
 
-
+now = datetime.now()
 # Equation with intersection(Lab4)
 while (with_interaction):
     m = 3
@@ -394,12 +396,13 @@ while (with_interaction):
     x_table_with_x0 = [[+1] + row for row in x_table]
     fisher_with_interaction = fisher_criteria(m, N, 1, x_table_with_x0, y_arr, b_i, importance)
     print(" (при врахуванні взаємодії)\n\n")
-
+    time_Lab4 = str(datetime.now()-now)[6:]
 
 
 
 
 #with quadratic terms(LAB6)
+    now = datetime.now()
     if fisher_with_interaction == False:
         m = 3
         N = 15
@@ -636,5 +639,7 @@ while (with_interaction):
         print(" (при врахуванні квадратичних членів)\n")
         yi_to_print = ["y_{} = {}".format(i, yi[i]) for i in range(len(yi))]
         for i in yi_to_print: print(i)
+        time_Lab6 = str(datetime.now()-now)[6:]
+        print("\n Час виконання Lab3 -> {} c\n Час виконання Lab4 -> {} c\n Час виконання Lab6 -> {} c".format(time_Lab3,time_Lab4,time_Lab6))
 
     with_interaction = False
